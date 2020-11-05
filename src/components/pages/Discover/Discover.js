@@ -10,13 +10,14 @@ class Discover extends Component {
   };
   //function for the event handler
   handleIncrement = () => {
-    this.setState({ count: this.state.count + 1 });
+      const randomNumber = Math.floor(Math.random()*5);
+      if(randomNumber === 1) {
+          this.setState({ count: this.state.count + 1 });
+        }
     this.searchDog();
   };
   //function for the event handler
   handleDecrement = () => {
-    if(this.state.count > 0)
-    this.setState({ count: this.state.count - 1 });
     this.searchDog();
   };
 
@@ -31,12 +32,23 @@ class Discover extends Component {
         this.setState({ currentDog: res.data.message})})
       .catch(err => console.log(err));
       
+    
       
       render() {
           return (
-              <DiscoverCard count={this.state.count} Increment={this.handleIncrement} Decrement={this.handleDecrement} currentDog={this.state.currentDog} />
+              <div>
+              <DiscoverCard 
+              count={this.state.count} 
+              Increment={this.handleIncrement} 
+              Decrement={this.handleDecrement} 
+              currentDog={this.state.currentDog} />
+
+              <h3 className="text-center alert-success" role="alert">{this.state.count} like you too!</h3>
+              </div>
               );
+              
             }
         }
+    
 
 export default Discover;
